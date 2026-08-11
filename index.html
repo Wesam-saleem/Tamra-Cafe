@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tamra Coffee House | From Our Palm to Your Cup</title>
+  <meta name="description" content="Tamra Coffee House — A farm-to-table café in Al Rabieh, Amman. Specialty coffee, Jordanian Medjool dates, and a unique dining experience."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #c9993e;
+      --gold-light: #e0b86a;
+      --gold-dark: #9a7128;
+      --black: #080503;
+      --dark: #0f0a05;
+      --dark2: #1a1008;
+      --dark3: #221508;
+      --cream: #f5edd8;
+      --tan: #d4b483;
+      --text: #e8d8b8;
+      --muted: #9a8060;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    /* ========== SCROLLBAR ========== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+
+    /* ========== NAV ========== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+      background: rgba(8,5,3,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(201,153,62,0.15);
+      transition: all 0.4s ease;
+    }
+    nav.scrolled { height: 60px; background: rgba(8,5,3,0.97); }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo-circle {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 700; color: var(--black);
+      letter-spacing: -1px;
+      flex-shrink: 0;
+    }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text span:first-child {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 600; color: var(--cream);
+      letter-spacing: 1px;
+    }
+    .nav-logo-text span:last-child {
+      font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex; gap: 32px; list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--tan);
+      font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;
+      font-weight: 500; transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content:''; position: absolute; bottom:-4px; left:0; right:0; height:1px;
+      background: var(--gold); transform: scaleX(0); transition: transform 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      background: var(--gold); color: var(--black) !important;
+      padding: 8px 20px; border-radius: 2px;
+      font-weight: 600 !important; letter-spacing: 1px !important;
+      transition: background 0.3s !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+    .nav-cta::after { display: none !important; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 1.5px;
+      background: var(--gold); transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none; position: fixed; top: 72px; left:0; right:0; bottom:0;
+      background: rgba(8,5,3,0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999; flex-direction: column;
+      align-items: center; justify-content: center; gap: 36px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      text-decoration: none; color: var(--tan);
+      font-size: 20px; letter-spacing: 3px; text-transform: uppercase;
+      font-family: 'Playfair Display', serif;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* ========== HERO ========== */
+    #hero {
+      position: relative; height: 100vh; min-height: 600px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('assets/media_1786472488081.png');
+      background-size: cover; background-position: center;
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+    .hero-bg.loaded { transform: scale(1); }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(8,5,3,0.92) 0%,
+        rgba(15,10,5,0.75) 50%,
+        rgba(8,5,3,0.88) 100%
+      );
+    }
+    .hero-content {
+      position: relative; text-align: center; max-width: 750px; padding: 0 24px;
+      animation: heroFadeIn 1.4s ease forwards;
+    }
+    @keyframes heroFadeIn {
+      from { opacity:0; transform: translateY(30px); }
+      to { opacity:1; transform: translateY(0); }
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(201,153,62,0.4);
+      padding: 6px 20px; margin-bottom: 28px; border-radius: 1px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 8vw, 88px);
+      line-height: 1.05; color: var(--cream);
+      margin-bottom: 14px; font-weight: 700;
+    }
+    .hero-title .gold { color: var(--gold); font-style: italic; }
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: var(--tan); font-style: italic; margin-bottom: 40px;
+      letter-spacing: 1px;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--black);
+      padding: 14px 36px; font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 700;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.3s; border-radius: 2px;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--cream);
+      padding: 14px 36px; font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 600;
+      text-decoration: none; border: 1px solid rgba(245,237,216,0.3);
+      cursor: pointer; transition: all 0.3s; border-radius: 2px;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--muted); font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll::after {
+      content:''; display:block; width:1px; height:40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+    .hero-stats {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      display: flex; justify-content: center;
+      background: rgba(8,5,3,0.85); backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(201,153,62,0.2);
+    }
+    .stat-item {
+      padding: 20px 48px; text-align: center;
+      border-right: 1px solid rgba(201,153,62,0.15);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; color: var(--gold); font-weight: 700;
+    }
+    .stat-label { font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-top: 2px; }
+
+    /* ========== SECTIONS ========== */
+    section { padding: 100px 5%; }
+    .section-label {
+      font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 14px; display: block;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 52px); color: var(--cream);
+      line-height: 1.15; margin-bottom: 20px;
+    }
+    .section-title em { color: var(--gold); font-style: italic; }
+    .section-line {
+      width: 60px; height: 1px; background: var(--gold);
+      margin-bottom: 28px;
+    }
+    .section-line.center { margin: 0 auto 28px; }
+    .text-center { text-align: center; }
+
+    /* ========== ABOUT ========== */
+    #about { background: var(--dark); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-main {
+      width: 100%; height: 520px; object-fit: cover; border-radius: 2px;
+      display: block;
+    }
+    .about-img-accent {
+      position: absolute; bottom: -30px; right: -30px;
+      width: 45%; aspect-ratio: 1;
+      object-fit: cover; border-radius: 2px;
+      border: 4px solid var(--dark);
+    }
+    .about-badge {
+      position: absolute; top: 24px; left: -20px;
+      background: var(--gold); color: var(--black);
+      padding: 10px 20px; font-size: 11px; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 700;
+    }
+    .about-text p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; line-height: 1.8; color: var(--tan);
+      margin-bottom: 20px;
+    }
+    .about-features {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-top: 32px;
+    }
+    .about-feature {
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .feature-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(201,153,62,0.12); border: 1px solid rgba(201,153,62,0.3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 16px;
+    }
+    .feature-text strong {
+      display: block; color: var(--cream); font-size: 13px; margin-bottom: 2px;
+    }
+    .feature-text span { color: var(--muted); font-size: 12px; }
+
+    /* ========== SIGNATURE SECTION ========== */
+    #signature { background: var(--black); }
+    .signature-inner { max-width: 1200px; margin: 0 auto; }
+    .sig-drinks-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 60px;
+    }
+    .sig-card {
+      background: var(--dark2); overflow: hidden;
+      position: relative; transition: transform 0.4s;
+    }
+    .sig-card:hover { transform: translateY(-4px); }
+    .sig-card-img {
+      width: 100%; height: 260px; object-fit: cover;
+      display: block; transition: transform 0.6s;
+    }
+    .sig-card:hover .sig-card-img { transform: scale(1.04); }
+    .sig-card-body { padding: 24px; }
+    .sig-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; color: var(--cream); margin-bottom: 8px;
+    }
+    .sig-card-desc { color: var(--muted); font-size: 13px; line-height: 1.6; margin-bottom: 14px; }
+    .sig-card-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; color: var(--gold); font-weight: 700;
+    }
+    .sig-card-price span { font-size: 13px; color: var(--muted); font-family: 'Inter', sans-serif; }
+    .sig-card-tag {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(201,153,62,0.9); color: var(--black);
+      padding: 4px 10px; font-size: 9px; letter-spacing: 1.5px;
+      text-transform: uppercase; font-weight: 700; border-radius: 1px;
+    }
+
+    /* Dessert grid */
+    .sig-desserts-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 2px;
+    }
+    .dessert-card {
+      background: var(--dark3); padding: 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid rgba(201,153,62,0.08);
+      transition: background 0.3s;
+    }
+    .dessert-card:hover { background: rgba(201,153,62,0.06); }
+    .dessert-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; color: var(--cream); margin-bottom: 4px;
+    }
+    .dessert-desc { color: var(--muted); font-size: 12px; line-height: 1.5; max-width: 220px; }
+    .dessert-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; color: var(--gold); font-weight: 700;
+      white-space: nowrap; margin-left: 16px;
+    }
+
+    /* ========== FULL MENU ========== */
+    #menu { background: var(--dark); }
+    .menu-inner { max-width: 1100px; margin: 0 auto; }
+    .menu-tabs {
+      display: flex; gap: 0; margin: 48px 0 0; justify-content: center;
+      border-bottom: 1px solid rgba(201,153,62,0.2);
+    }
+    .menu-tab {
+      background: none; border: none; cursor: pointer;
+      padding: 14px 32px; font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--muted); font-weight: 500;
+      position: relative; transition: color 0.3s; font-family: 'Inter', sans-serif;
+    }
+    .menu-tab::after {
+      content:''; position: absolute; bottom:-1px; left:0; right:0;
+      height: 2px; background: var(--gold);
+      transform: scaleX(0); transition: transform 0.3s;
+    }
+    .menu-tab.active { color: var(--gold); }
+    .menu-tab.active::after { transform: scaleX(1); }
+    .menu-tab:hover { color: var(--tan); }
+    .menu-panel { display: none; padding: 48px 0; }
+    .menu-panel.active { display: block; }
+    .menu-category {
+      font-size: 10px; letter-spacing: 4px; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 24px; display: block;
+    }
+    .menu-list { list-style: none; margin-bottom: 40px; }
+    .menu-item {
+      display: flex; align-items: baseline; gap: 8px;
+      padding: 13px 0; border-bottom: 1px solid rgba(201,153,62,0.06);
+      transition: padding-left 0.2s;
+    }
+    .menu-item:hover { padding-left: 6px; }
+    .menu-item:last-child { border-bottom: none; }
+    .item-name { color: var(--cream); font-size: 15px; flex: 1; }
+    .item-dots {
+      flex: 1; border-bottom: 1px dotted rgba(201,153,62,0.2);
+      margin: 0 8px; min-width: 20px;
+    }
+    .item-prices { display: flex; gap: 24px; }
+    .item-price { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; min-width: 40px; text-align: right; }
+    .item-price.muted { color: var(--muted); }
+    .size-header {
+      display: flex; justify-content: flex-end; gap: 24px;
+      padding-bottom: 10px; border-bottom: 1px solid rgba(201,153,62,0.15);
+      margin-bottom: 4px;
+    }
+    .size-label {
+      font-size: 10px; letter-spacing: 2px; color: var(--muted);
+      text-transform: uppercase; min-width: 40px; text-align: right;
+    }
+    .addons-box {
+      background: rgba(201,153,62,0.06);
+      border: 1px solid rgba(201,153,62,0.15);
+      padding: 24px 28px; margin-top: 12px;
+    }
+    .addons-title {
+      font-size: 11px; letter-spacing: 3px; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .addons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+    .addon-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 0; border-bottom: 1px solid rgba(201,153,62,0.08);
+      font-size: 14px; color: var(--tan);
+    }
+    .addon-item:last-child { border-bottom: none; }
+    .addon-price { color: var(--gold); margin-left: auto; font-weight: 600; }
+    .milk-options {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px;
+    }
+    .milk-tag {
+      border: 1px solid rgba(201,153,62,0.3); padding: 4px 12px;
+      font-size: 11px; color: var(--muted); border-radius: 20px;
+    }
+
+    /* ========== LOYALTY PROGRAM ========== */
+    #loyalty {
+      background: linear-gradient(135deg, var(--black) 0%, var(--dark3) 50%, var(--black) 100%);
+      position: relative; overflow: hidden;
+    }
+    #loyalty::before {
+      content:''; position: absolute; top: -50%; left: -20%;
+      width: 140%; height: 200%;
+      background: radial-gradient(ellipse at center, rgba(201,153,62,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .loyalty-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+    .loyalty-card-main {
+      background: linear-gradient(135deg, rgba(201,153,62,0.12) 0%, rgba(15,10,5,0.9) 100%);
+      border: 1px solid rgba(201,153,62,0.25);
+      border-radius: 4px; padding: 60px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center; margin-top: 60px;
+      backdrop-filter: blur(10px);
+    }
+    .loyalty-how-it-works { margin-top: 60px; }
+    .loyalty-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px; margin-top: 32px;
+    }
+    .loyalty-step {
+      background: var(--dark2); padding: 32px 24px; text-align: center;
+      position: relative; transition: background 0.3s;
+    }
+    .loyalty-step:hover { background: rgba(201,153,62,0.08); }
+    .step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid var(--gold); color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 20px;
+      margin: 0 auto 16px;
+    }
+    .step-title { color: var(--cream); font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .step-desc { color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .loyalty-tiers { margin-top: 60px; }
+    .tiers-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 32px;
+    }
+    .tier-card {
+      background: var(--dark2); padding: 36px 28px; text-align: center;
+      border-top: 3px solid transparent; transition: all 0.3s; position: relative;
+      overflow: hidden;
+    }
+    .tier-card.bronze { border-top-color: #cd7f32; }
+    .tier-card.silver { border-top-color: #c0c0c0; }
+    .tier-card.gold-tier { border-top-color: var(--gold); background: rgba(201,153,62,0.07); }
+    .tier-card:hover { transform: translateY(-4px); }
+    .tier-icon { font-size: 36px; margin-bottom: 16px; }
+    .tier-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; margin-bottom: 6px;
+    }
+    .tier-card.bronze .tier-name { color: #cd7f32; }
+    .tier-card.silver .tier-name { color: #c0c0c0; }
+    .tier-card.gold-tier .tier-name { color: var(--gold); }
+    .tier-points { color: var(--muted); font-size: 12px; margin-bottom: 20px; }
+    .tier-perks { list-style: none; text-align: left; }
+    .tier-perks li {
+      font-size: 13px; color: var(--tan); padding: 7px 0;
+      border-bottom: 1px solid rgba(201,153,62,0.08);
+      display: flex; gap: 8px;
+    }
+    .tier-perks li:last-child { border-bottom: none; }
+    .tier-perks li::before { content: '✓'; color: var(--gold); flex-shrink: 0; }
+
+    /* Loyalty form */
+    .loyalty-form-wrap { }
+    .loyalty-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px; color: var(--cream); line-height: 1.2; margin-bottom: 16px;
+    }
+    .loyalty-title em { color: var(--gold); font-style: italic; }
+    .loyalty-desc { color: var(--tan); font-size: 15px; line-height: 1.7; margin-bottom: 32px; }
+    .loyalty-form { display: flex; flex-direction: column; gap: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 11px; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; }
+    .form-group input, .form-group select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,153,62,0.2);
+      color: var(--cream); padding: 12px 16px; font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none; transition: border-color 0.3s; border-radius: 2px;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+    .form-group input::placeholder { color: var(--muted); }
+    .form-group select option { background: var(--dark2); }
+    .loyalty-points-display {
+      background: rgba(201,153,62,0.06);
+      border: 1px solid rgba(201,153,62,0.2);
+      padding: 24px; text-align: center; border-radius: 2px;
+    }
+    .points-big {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px; color: var(--gold); font-weight: 700; line-height: 1;
+    }
+    .points-label { color: var(--muted); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+    .points-bar { height: 4px; background: rgba(201,153,62,0.15); margin: 16px 0; border-radius: 2px; }
+    .points-fill { height: 100%; background: var(--gold); border-radius: 2px; width: 0%; transition: width 1s ease; }
+    .points-next { font-size: 11px; color: var(--muted); }
+    .register-success {
+      display: none; text-align: center; padding: 20px;
+      background: rgba(201,153,62,0.08);
+      border: 1px solid rgba(201,153,62,0.3); border-radius: 2px;
+    }
+    .register-success .check { font-size: 36px; margin-bottom: 10px; }
+    .register-success h3 { font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 8px; }
+    .register-success p { color: var(--muted); font-size: 13px; }
+
+    /* ========== GALLERY ========== */
+    #gallery { background: var(--black); padding: 100px 0; }
+    .gallery-inner { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(2, 280px);
+      gap: 3px; margin-top: 48px;
+    }
+    .gallery-item {
+      overflow: hidden; position: relative; cursor: pointer;
+    }
+    .gallery-item:nth-child(1) { grid-column: 1/3; grid-row: 1/3; }
+    .gallery-item:nth-child(2) { grid-column: 3/5; }
+    .gallery-item:nth-child(3) { grid-column: 5; }
+    .gallery-item:nth-child(4) { grid-column: 3; }
+    .gallery-item:nth-child(5) { grid-column: 4/6; }
+    .gallery-img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .gallery-item:hover .gallery-img { transform: scale(1.06); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(8,5,3,0.5);
+      opacity: 0; transition: opacity 0.3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span {
+      font-size: 24px; color: var(--gold);
+    }
+
+    /* ========== VISIT US ========== */
+    #visit { background: var(--dark); }
+    .visit-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .visit-info-item {
+      display: flex; gap: 18px; margin-bottom: 32px; align-items: flex-start;
+    }
+    .visit-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(201,153,62,0.1); border: 1px solid rgba(201,153,62,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0; margin-top: 2px;
+    }
+    .visit-info-text strong {
+      display: block; color: var(--cream); font-size: 15px; margin-bottom: 4px;
+    }
+    .visit-info-text span, .visit-info-text a {
+      color: var(--muted); font-size: 13px; line-height: 1.7;
+      text-decoration: none; display: block;
+    }
+    .visit-info-text a:hover { color: var(--gold); }
+    .map-wrap {
+      border: 1px solid rgba(201,153,62,0.2);
+      overflow: hidden; border-radius: 2px;
+    }
+    .map-wrap iframe {
+      width: 100%; height: 380px; border: none;
+      filter: grayscale(80%) invert(90%) hue-rotate(180deg);
+      display: block;
+    }
+    .instagram-btn {
+      display: flex; align-items: center; gap: 12px;
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      color: white; padding: 14px 28px; border-radius: 2px;
+      text-decoration: none; font-size: 13px; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      transition: all 0.3s; margin-top: 24px; width: fit-content;
+    }
+    .instagram-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(131,58,180,0.4); }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(201,153,62,0.12);
+      padding: 60px 5% 30px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; max-width: 1200px; margin: 0 auto;
+    }
+    .footer-brand p {
+      color: var(--muted); font-size: 13px; line-height: 1.8; margin-top: 16px; max-width: 260px;
+    }
+    .footer-brand .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; font-style: italic; color: var(--gold);
+      margin-top: 16px; display: block;
+    }
+    .footer-col h4 {
+      color: var(--cream); font-size: 13px; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      color: var(--muted); font-size: 13px; text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-social { display: flex; gap: 12px; margin-top: 8px; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid rgba(201,153,62,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; text-decoration: none; transition: all 0.3s;
+    }
+    .social-btn:hover { border-color: var(--gold); background: rgba(201,153,62,0.1); }
+    .footer-bottom {
+      max-width: 1200px; margin: 40px auto 0;
+      padding-top: 24px; border-top: 1px solid rgba(201,153,62,0.08);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { color: var(--muted); font-size: 12px; }
+    .footer-bottom .gold-text { color: var(--gold); }
+
+    /* ========== ANIMATE ON SCROLL ========== */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ========== TOAST ========== */
+    .toast {
+      position: fixed; bottom: 30px; right: 30px; z-index: 9999;
+      background: var(--dark2); border: 1px solid var(--gold);
+      color: var(--cream); padding: 16px 24px;
+      border-radius: 2px; font-size: 13px;
+      display: none; animation: slideUp 0.3s ease;
+    }
+    .toast.show { display: block; }
+    @keyframes slideUp {
+      from { opacity:0; transform: translateY(10px); }
+      to { opacity:1; transform: translateY(0); }
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .about-grid, .visit-inner { grid-template-columns: 1fr; gap: 48px; }
+      .about-img-accent { display: none; }
+      .loyalty-card-main { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(2),
+      .gallery-item:nth-child(3),
+      .gallery-item:nth-child(4),
+      .gallery-item:nth-child(5) {
+        grid-column: auto; grid-row: auto;
+      }
+      .sig-drinks-grid, .sig-desserts-grid { grid-template-columns: 1fr; }
+      .tiers-grid { grid-template-columns: 1fr; }
+      .loyalty-steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-stats { display: none; }
+      .hero-title { font-size: 38px; }
+      section { padding: 70px 5%; }
+      .menu-tabs { flex-wrap: wrap; }
+      .menu-tab { padding: 10px 18px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+      .loyalty-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-circle">T</div>
+    <div class="nav-logo-text">
+      <span>Tamra</span>
+      <span>Coffee House</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#signature">Signatures</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#loyalty">Loyalty</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#visit" class="nav-cta">Visit Us</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">Our Story</a>
+  <a href="#signature" onclick="closeMobile()">Signatures</a>
+  <a href="#menu" onclick="closeMobile()">Menu</a>
+  <a href="#loyalty" onclick="closeMobile()">Loyalty</a>
+  <a href="#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="#visit" onclick="closeMobile()">Visit Us</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Al Rabieh · Amman · Jordan</div>
+    <h1 class="hero-title">
+      From Our <em class="gold">Palm</em><br>to Your Cup
+    </h1>
+    <p class="hero-tagline">A farm-to-table coffee experience rooted in Jordanian heritage</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary">Explore Menu</a>
+      <a href="#loyalty" class="btn-outline">Join Loyalty Program</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Discover</div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Jordanian Dates</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">Farm</div>
+      <div class="stat-label">to Table</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">Specialty</div>
+      <div class="stat-label">Coffee</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">Al Rabieh</div>
+      <div class="stat-label">Amman</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <div class="about-badge">Est. Al Rabieh, Amman</div>
+      <img src="assets/media_1786472488181.jpg" alt="Tamra Cafe Interior" class="about-img-main"/>
+      <img src="assets/media_1786472488094.png" alt="Tamra Products" class="about-img-accent"/>
+    </div>
+    <div class="about-text reveal">
+      <span class="section-label">Our Story</span>
+      <h2 class="section-title">Where the Date Farm<br>Meets the <em>Coffee Cup</em></h2>
+      <div class="section-line"></div>
+      <p>Tamra Coffee House was born from a simple but powerful idea: to bring the richness of Jordanian Medjool dates from our family farm directly to your cup and plate. Every sip, every bite tells the story of our land.</p>
+      <p>We believe that great coffee and exceptional food begin at the source. Our farm-to-table philosophy means everything we serve — from our signature date lattes to our handcrafted desserts — is made with premium ingredients sourced directly from our own date farm.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="feature-icon">🌴</div>
+          <div class="feature-text">
+            <strong>Our Own Date Farm</strong>
+            <span>Premium Medjool dates grown in Jordan</span>
+          </div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-icon">☕</div>
+          <div class="feature-text">
+            <strong>Specialty Coffee</strong>
+            <span>Expertly crafted with seasonal blends</span>
+          </div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-icon">🌿</div>
+          <div class="feature-text">
+            <strong>Natural Ingredients</strong>
+            <span>No artificial additives or preservatives</span>
+          </div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-icon">🏡</div>
+          <div class="feature-text">
+            <strong>Farm-to-Table</strong>
+            <span>From our land to your table, always fresh</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SIGNATURE ===== -->
+<section id="signature">
+  <div class="signature-inner">
+    <div class="text-center reveal">
+      <span class="section-label">From Our Farm</span>
+      <h2 class="section-title">Tamra <em>Signatures</em></h2>
+      <div class="section-line center"></div>
+      <p style="color:var(--muted);max-width:480px;margin:0 auto;font-size:15px;line-height:1.7">Crafted exclusively with Medjool dates from our farm — drinks and desserts you won't find anywhere else.</p>
+    </div>
+
+    <!-- Signature Drinks -->
+    <div class="sig-drinks-grid reveal">
+      <div class="sig-card">
+        <div class="sig-card-tag">Hot or Iced</div>
+        <img src="assets/media_1786472488060.png" alt="Tamra Latte" class="sig-card-img"/>
+        <div class="sig-card-body">
+          <div class="sig-card-name">Tamra Latte</div>
+          <div class="sig-card-desc">Espresso with creamy milk and our signature date syrup crafted from premium Medjool dates.</div>
+          <div class="sig-card-price">3.50 <span>JD</span></div>
+        </div>
+      </div>
+      <div class="sig-card">
+        <div class="sig-card-tag">Signature</div>
+        <img src="assets/media_1786472488102.jpg" alt="Palm Cold Brew" class="sig-card-img"/>
+        <div class="sig-card-body">
+          <div class="sig-card-name">Palm Cold Brew</div>
+          <div class="sig-card-desc">Smooth cold brew coffee topped with our signature date cream foam — rich and naturally sweet.</div>
+          <div class="sig-card-price">4.00 <span>JD</span></div>
+        </div>
+      </div>
+      <div class="sig-card">
+        <div class="sig-card-tag">Signature</div>
+        <img src="assets/media_1786472488094.png" alt="Tamra Tahini Shake" class="sig-card-img"/>
+        <div class="sig-card-body">
+          <div class="sig-card-name">Tamra Tahini Shake</div>
+          <div class="sig-card-desc">Blended Medjool dates, tahini, fresh milk, and a hint of cinnamon — indulgently wholesome.</div>
+          <div class="sig-card-price">4.00 <span>JD</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signature Desserts -->
+    <div style="margin-top:48px;" class="reveal">
+      <div class="text-center" style="margin-bottom:32px;">
+        <span class="section-label">Signature Desserts</span>
+        <h3 style="font-family:'Playfair Display',serif;font-size:28px;color:var(--cream)">Good for You. <em style="color:var(--gold);font-style:italic;">Good for the Land.</em></h3>
+      </div>
+    </div>
+    <div class="sig-desserts-grid reveal">
+      <div class="dessert-card">
+        <div>
+          <div class="dessert-name">Tamra Cheesecake</div>
+          <div class="dessert-desc">Creamy cheesecake with date caramel and a date crust</div>
+        </div>
+        <div class="dessert-price">4.75</div>
+      </div>
+      <div class="dessert-card">
+        <div>
+          <div class="dessert-name">Sticky Date Pudding</div>
+          <div class="dessert-desc">Warm date cake with butterscotch sauce and vanilla ice cream</div>
+        </div>
+        <div class="dessert-price">4.50</div>
+      </div>
+      <div class="dessert-card">
+        <div>
+          <div class="dessert-name">Date Cookie Skillet</div>
+          <div class="dessert-desc">Warm date cookie served with vanilla ice cream</div>
+        </div>
+        <div class="dessert-price">4.25</div>
+      </div>
+      <div class="dessert-card">
+        <div>
+          <div class="dessert-name">Date Brownie</div>
+          <div class="dessert-desc">Rich chocolate brownie made with premium dates</div>
+        </div>
+        <div class="dessert-price">3.95</div>
+      </div>
+      <div class="dessert-card">
+        <div>
+          <div class="dessert-name">Date &amp; Tahini Tart</div>
+          <div class="dessert-desc">Date filling with tahini cream on a crunchy almond base</div>
+        </div>
+        <div class="dessert-price">4.25</div>
+      </div>
+      <div class="dessert-card">
+        <div>
+          <div class="dessert-name">Stuffed Dates Trio</div>
+          <div class="dessert-desc">Three premium dates filled with pistachio, almond &amp; tahini chocolate</div>
+        </div>
+        <div class="dessert-price">3.75</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FULL MENU ===== -->
+<section id="menu">
+  <div class="menu-inner">
+    <div class="text-center reveal">
+      <span class="section-label">Full Menu</span>
+      <h2 class="section-title">Our <em>Complete</em> Menu</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="menu-tabs reveal">
+      <button class="menu-tab active" onclick="switchTab('hot',this)">Hot Drinks</button>
+      <button class="menu-tab" onclick="switchTab('cold',this)">Cold Drinks</button>
+      <button class="menu-tab" onclick="switchTab('desserts',this)">Desserts</button>
+    </div>
+
+    <!-- HOT DRINKS -->
+    <div class="menu-panel active" id="panel-hot">
+      <div class="size-header">
+        <span class="size-label">S</span>
+        <span class="size-label">R</span>
+      </div>
+      <ul class="menu-list">
+        <li class="menu-item"><span class="item-name">Espresso</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.00</span><span class="item-price muted">—</span></div></li>
+        <li class="menu-item"><span class="item-name">Macchiato</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.25</span><span class="item-price muted">—</span></div></li>
+        <li class="menu-item"><span class="item-name">Filtered</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.00</span><span class="item-price">2.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Americano</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.00</span><span class="item-price">2.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Red Eye</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.00</span><span class="item-price">3.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Turkish</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.00</span><span class="item-price muted">—</span></div></li>
+        <li class="menu-item"><span class="item-name">V 60</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.00</span><span class="item-price muted">—</span></div></li>
+        <li class="menu-item"><span class="item-name">Latte</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.50</span><span class="item-price">3.00</span></div></li>
+        <li class="menu-item"><span class="item-name">Cappuccino</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.50</span><span class="item-price">3.00</span></div></li>
+        <li class="menu-item"><span class="item-name">Flat White</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.25</span><span class="item-price muted">—</span></div></li>
+        <li class="menu-item"><span class="item-name">Cortado</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.25</span><span class="item-price muted">—</span></div></li>
+        <li class="menu-item"><span class="item-name">Spanish Latte</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.75</span><span class="item-price">3.25</span></div></li>
+        <li class="menu-item"><span class="item-name">Caramel Macchiato</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.75</span><span class="item-price">3.25</span></div></li>
+        <li class="menu-item"><span class="item-name">Mocha</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.75</span><span class="item-price">3.25</span></div></li>
+        <li class="menu-item"><span class="item-name">White Mocha</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.75</span><span class="item-price">3.25</span></div></li>
+        <li class="menu-item"><span class="item-name">Pistachio Latte</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.00</span><span class="item-price">3.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Hot Chocolate</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.50</span><span class="item-price">3.00</span></div></li>
+        <li class="menu-item"><span class="item-name">Matcha Latte</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.00</span><span class="item-price">3.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Tea</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.00</span><span class="item-price muted">—</span></div></li>
+      </ul>
+      <div class="addons-box">
+        <div class="addons-title">Add On's</div>
+        <div class="addons-grid">
+          <div class="addon-item">Espresso Shot <span class="addon-price">+0.50</span></div>
+          <div class="addon-item" style="color:var(--muted);font-size:12px;">Alt Milk Options:</div>
+          <div class="addon-item">Flavor <span class="addon-price">+0.50</span></div>
+          <div class="addon-item" style="flex-direction:column;align-items:flex-start;gap:4px;">
+            <div class="milk-options">
+              <span class="milk-tag">Lactose Free</span>
+              <span class="milk-tag">Oat</span>
+              <span class="milk-tag">Almond</span>
+              <span class="milk-tag">Coconut</span>
+            </div>
+          </div>
+          <div class="addon-item">Alt Milk <span class="addon-price">+0.75</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLD DRINKS -->
+    <div class="menu-panel" id="panel-cold">
+      <p style="font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:20px;">R — Regular Size Only</p>
+      <ul class="menu-list">
+        <li class="menu-item"><span class="item-name">Ice Americano</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Ice Latte</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.00</span></div></li>
+        <li class="menu-item"><span class="item-name">Ice Spanish Latte</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.25</span></div></li>
+        <li class="menu-item"><span class="item-name">Ice Caramel Macchiato</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.25</span></div></li>
+        <li class="menu-item"><span class="item-name">Ice Mocha</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.25</span></div></li>
+        <li class="menu-item"><span class="item-name">Ice White Mocha</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.25</span></div></li>
+        <li class="menu-item"><span class="item-name">Ice Pistachio Latte</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Ice Shaken</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Frappe</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Iced Tea</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">2.75</span></div></li>
+        <li class="menu-item"><span class="item-name">Smoothie</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Milkshake</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Frozen Yogurt</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.75</span></div></li>
+        <li class="menu-item"><span class="item-name">Mojito</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.00</span></div></li>
+        <li class="menu-item"><span class="item-name">Red Bull Mix</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Orange Juice</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.00</span></div></li>
+        <li class="menu-item"><span class="item-name">Mint Lemonade</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.00</span></div></li>
+        <li class="menu-item"><span class="item-name">Ice Matcha</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Cold Brew</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">4.00</span></div></li>
+      </ul>
+    </div>
+
+    <!-- DESSERTS -->
+    <div class="menu-panel" id="panel-desserts">
+      <ul class="menu-list">
+        <li class="menu-item"><span class="item-name">Tamra Cheesecake</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">4.75</span></div></li>
+        <li class="menu-item"><span class="item-name">Sticky Date Pudding</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">4.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Date Cookie Skillet</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">4.25</span></div></li>
+        <li class="menu-item"><span class="item-name">Date Brownie</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.95</span></div></li>
+        <li class="menu-item"><span class="item-name">Date &amp; Tahini Tart</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">4.25</span></div></li>
+        <li class="menu-item"><span class="item-name">Stuffed Dates Trio</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.75</span></div></li>
+        <li class="menu-item"><span class="item-name">Tamra Latte (Hot or Iced)</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">3.50</span></div></li>
+        <li class="menu-item"><span class="item-name">Palm Cold Brew</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">4.00</span></div></li>
+        <li class="menu-item"><span class="item-name">Tamra Tahini Shake</span><span class="item-dots"></span><div class="item-prices"><span class="item-price">4.00</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOYALTY PROGRAM ===== -->
+<section id="loyalty">
+  <div class="loyalty-inner">
+    <div class="text-center reveal">
+      <span class="section-label">Rewards Program</span>
+      <h2 class="section-title">The <em>Tamra</em> Loyalty Club</h2>
+      <div class="section-line center"></div>
+      <p style="color:var(--muted);max-width:520px;margin:0 auto;font-size:15px;line-height:1.7">Every visit brings you closer to exclusive rewards. Join our palm-to-cup loyalty family and earn points with every order.</p>
+    </div>
+
+    <!-- Register Card -->
+    <div class="loyalty-card-main reveal">
+      <div class="loyalty-form-wrap">
+        <h3 class="loyalty-title">Join the <em>Club</em></h3>
+        <p class="loyalty-desc">Sign up today and start earning points immediately. Every 1 JD spent = 10 Tamra Points.</p>
+        <form class="loyalty-form" id="loyaltyForm" onsubmit="registerLoyalty(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" id="firstName" placeholder="Your first name" required/>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" id="lastName" placeholder="Your last name" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="email" placeholder="your@email.com" required/>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="phone" placeholder="+962 79 xxx xxxx" required/>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date of Birth</label>
+              <input type="date" id="dob"/>
+            </div>
+            <div class="form-group">
+              <label>Preferred Visit Time</label>
+              <select id="visitTime">
+                <option value="">Select time</option>
+                <option>Morning (7am - 12pm)</option>
+                <option>Afternoon (12pm - 5pm)</option>
+                <option>Evening (5pm - 10pm)</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;padding:16px;font-size:13px;">
+            Join Tamra Loyalty Club ✦
+          </button>
+        </form>
+        <div class="register-success" id="registerSuccess">
+          <div class="check">✦</div>
+          <h3>Welcome to the Club!</h3>
+          <p id="successMsg">Your loyalty card has been registered. Show this at Tamra to start earning points!</p>
+        </div>
+      </div>
+
+      <!-- Points Display -->
+      <div>
+        <div class="loyalty-points-display" id="pointsDisplay">
+          <div class="points-big" id="pointsCount">0</div>
+          <div class="points-label">Tamra Points</div>
+          <div class="points-bar"><div class="points-fill" id="pointsFill"></div></div>
+          <div class="points-next" id="pointsNext">Earn 500 points to reach Silver status</div>
+        </div>
+        <div style="margin-top:28px;">
+          <div style="font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;">How Points Work</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(201,153,62,0.06);border:1px solid rgba(201,153,62,0.12);">
+              <span style="color:var(--tan);font-size:13px;">Every 1 JD spent</span>
+              <span style="color:var(--gold);font-weight:700;">= 10 Points</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(201,153,62,0.06);border:1px solid rgba(201,153,62,0.12);">
+              <span style="color:var(--tan);font-size:13px;">Birthday bonus</span>
+              <span style="color:var(--gold);font-weight:700;">+200 Points</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(201,153,62,0.06);border:1px solid rgba(201,153,62,0.12);">
+              <span style="color:var(--tan);font-size:13px;">Refer a friend</span>
+              <span style="color:var(--gold);font-weight:700;">+150 Points</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(201,153,62,0.06);border:1px solid rgba(201,153,62,0.12);">
+              <span style="color:var(--tan);font-size:13px;">Instagram story tag</span>
+              <span style="color:var(--gold);font-weight:700;">+50 Points</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="loyalty-how-it-works reveal">
+      <div class="text-center" style="margin-bottom:0;">
+        <span class="section-label">How It Works</span>
+        <h3 style="font-family:'Playfair Display',serif;font-size:28px;color:var(--cream)">Four Simple <em style="color:var(--gold);font-style:italic;">Steps</em></h3>
+      </div>
+      <div class="loyalty-steps">
+        <div class="loyalty-step">
+          <div class="step-num">1</div>
+          <div class="step-title">Register</div>
+          <div class="step-desc">Fill in the form above or register at Tamra Cafe to receive your digital loyalty card.</div>
+        </div>
+        <div class="loyalty-step">
+          <div class="step-num">2</div>
+          <div class="step-title">Visit & Order</div>
+          <div class="step-desc">Every time you visit, show your loyalty card and earn 10 points per JD spent.</div>
+        </div>
+        <div class="loyalty-step">
+          <div class="step-num">3</div>
+          <div class="step-title">Earn Points</div>
+          <div class="step-desc">Points accumulate automatically. Bonus points on birthdays, referrals, and social shares.</div>
+        </div>
+        <div class="loyalty-step">
+          <div class="step-num">4</div>
+          <div class="step-title">Redeem Rewards</div>
+          <div class="step-desc">Redeem points for free drinks, exclusive desserts, and members-only experiences.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tiers -->
+    <div class="loyalty-tiers reveal">
+      <div class="text-center" style="margin-bottom:0;">
+        <span class="section-label">Membership Tiers</span>
+        <h3 style="font-family:'Playfair Display',serif;font-size:28px;color:var(--cream)">Your <em style="color:var(--gold);font-style:italic;">Journey</em> with Tamra</h3>
+      </div>
+      <div class="tiers-grid">
+        <div class="tier-card bronze reveal">
+          <div class="tier-icon">🌱</div>
+          <div class="tier-name">Palm Seedling</div>
+          <div class="tier-points">0 – 499 Points</div>
+          <ul class="tier-perks">
+            <li>Welcome drink on registration</li>
+            <li>Birthday month bonus points</li>
+            <li>Access to member-only menu items</li>
+            <li>Early access to seasonal products</li>
+          </ul>
+        </div>
+        <div class="tier-card silver reveal">
+          <div class="tier-icon">🌴</div>
+          <div class="tier-name">Palm Grove</div>
+          <div class="tier-points">500 – 1499 Points</div>
+          <ul class="tier-perks">
+            <li>All Seedling benefits</li>
+            <li>Free drink every 200 points</li>
+            <li>10% discount on all desserts</li>
+            <li>Priority seating on weekends</li>
+            <li>Monthly exclusive offers</li>
+          </ul>
+        </div>
+        <div class="tier-card gold-tier reveal">
+          <div class="tier-icon">👑</div>
+          <div class="tier-name">Date Crown</div>
+          <div class="tier-points">1500+ Points</div>
+          <ul class="tier-perks">
+            <li>All Grove benefits</li>
+            <li>Free drink every 150 points</li>
+            <li>15% discount on everything</li>
+            <li>Free birthday dessert platter</li>
+            <li>Invite to exclusive farm events</li>
+            <li>Personal barista experience</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery">
+  <div class="gallery-inner">
+    <div class="text-center reveal">
+      <span class="section-label">Gallery</span>
+      <h2 class="section-title">Life at <em>Tamra</em></h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item">
+        <img src="assets/media_1786472488181.jpg" alt="Tamra Interior" class="gallery-img"/>
+        <div class="gallery-overlay"><span>✦</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/media_1786472488060.png" alt="Tamra Coffee and Food" class="gallery-img"/>
+        <div class="gallery-overlay"><span>✦</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/media_1786472488094.png" alt="Tamra Products" class="gallery-img"/>
+        <div class="gallery-overlay"><span>✦</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/media_1786472488102.jpg" alt="Tamra Bar" class="gallery-img"/>
+        <div class="gallery-overlay"><span>✦</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/media_1786472488081.png" alt="Tamra Exterior" class="gallery-img"/>
+        <div class="gallery-overlay"><span>✦</span></div>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:40px;">
+      <a href="https://www.instagram.com/tmracoffeehouse" target="_blank" class="instagram-btn">
+        <span>📸</span> Follow us @tmracoffeehouse
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VISIT US ===== -->
+<section id="visit">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="text-center reveal" style="margin-bottom:60px;">
+      <span class="section-label">Find Us</span>
+      <h2 class="section-title">Come <em>Visit</em> Us</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="visit-inner">
+      <div class="reveal">
+        <div class="visit-info-item">
+          <div class="visit-icon">📍</div>
+          <div class="visit-info-text">
+            <strong>Location</strong>
+            <span>Al Rabieh, Amman, Jordan</span>
+            <a href="https://maps.app.goo.gl/62UGPUDCMPHTqwjk8" target="_blank" style="color:var(--gold);margin-top:6px;">Get Directions →</a>
+          </div>
+        </div>
+        <div class="visit-info-item">
+          <div class="visit-icon">🕐</div>
+          <div class="visit-info-text">
+            <strong>Opening Hours</strong>
+            <span>Monday – Thursday: 7:00 AM – 11:00 PM</span>
+            <span>Friday – Saturday: 7:00 AM – 12:00 AM</span>
+            <span>Sunday: 8:00 AM – 11:00 PM</span>
+          </div>
+        </div>
+        <div class="visit-info-item">
+          <div class="visit-icon">📱</div>
+          <div class="visit-info-text">
+            <strong>Follow on Instagram</strong>
+            <a href="https://www.instagram.com/tmracoffeehouse" target="_blank">@tmracoffeehouse</a>
+          </div>
+        </div>
+        <div class="visit-info-item">
+          <div class="visit-icon">🚗</div>
+          <div class="visit-info-text">
+            <strong>Parking</strong>
+            <span>Available in the complex. Street parking nearby.</span>
+          </div>
+        </div>
+        <a href="https://www.instagram.com/tmracoffeehouse" target="_blank" class="instagram-btn">
+          <span>📸</span> Visit our Instagram
+        </a>
+      </div>
+      <div class="reveal">
+        <div class="map-wrap">
+          <iframe
+            src="https://maps.google.com/maps?q=Tamra+Coffee+House+Al+Rabieh+Amman+Jordan&output=embed&z=16"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div style="margin-top:16px;padding:16px 20px;background:var(--dark2);border:1px solid rgba(201,153,62,0.12);display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="color:var(--cream);font-size:14px;font-weight:600;">Tamra Coffee House</div>
+            <div style="color:var(--muted);font-size:12px;margin-top:2px;">Al Rabieh, Amman, Jordan</div>
+          </div>
+          <a href="https://maps.app.goo.gl/62UGPUDCMPHTqwjk8" target="_blank" style="background:var(--gold);color:var(--black);padding:8px 18px;font-size:11px;letter-spacing:1px;text-decoration:none;font-weight:700;text-transform:uppercase;border-radius:2px;">Directions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--black);">T</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--cream);">Tamra</div>
+          <div style="font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;">Coffee House</div>
+        </div>
+      </div>
+      <p>A farm-to-table coffee experience rooted in Jordanian agricultural heritage. Every sip tells our story.</p>
+      <span class="tagline">"From Our Palm to Your Cup"</span>
+      <div class="footer-social" style="margin-top:20px;">
+        <a href="https://www.instagram.com/tmracoffeehouse" target="_blank" class="social-btn" title="Instagram">📸</a>
+        <a href="https://maps.app.goo.gl/62UGPUDCMPHTqwjk8" target="_blank" class="social-btn" title="Location">📍</a>
+        <a href="#loyalty" class="social-btn" title="Loyalty">⭐</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <ul>
+        <li><a href="#signature">Tamra Signatures</a></li>
+        <li><a href="#menu">Hot Drinks</a></li>
+        <li><a href="#menu">Cold Drinks</a></li>
+        <li><a href="#menu">Desserts</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#visit">Location</a></li>
+        <li><a href="#loyalty">Loyalty Club</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/tmracoffeehouse" target="_blank">Instagram</a></li>
+        <li><a href="https://maps.app.goo.gl/62UGPUDCMPHTqwjk8" target="_blank">Google Maps</a></li>
+        <li><a href="#loyalty">Join Loyalty</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 <span class="gold-text">Tamra Coffee House</span>. All rights reserved. Al Rabieh, Amman, Jordan.</p>
+    <p style="color:var(--gold)">tamra.cafe</p>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ===== NAV SCROLL =====
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ===== HERO BG =====
+  setTimeout(() => {
+    document.getElementById('heroBg').classList.add('loaded');
+  }, 100);
+
+  // ===== HAMBURGER =====
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // ===== MENU TABS =====
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + tab).classList.add('active');
+  }
+
+  // ===== REVEAL ON SCROLL =====
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ===== LOYALTY REGISTRATION =====
+  function registerLoyalty(e) {
+    e.preventDefault();
+    const first = document.getElementById('firstName').value;
+    const last = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+    const form = document.getElementById('loyaltyForm');
+    const success = document.getElementById('registerSuccess');
+    const successMsg = document.getElementById('successMsg');
+
+    // Animate points
+    let pts = 0;
+    const target = 50; // welcome bonus
+    const interval = setInterval(() => {
+      pts += 2;
+      document.getElementById('pointsCount').textContent = pts;
+      if (pts >= target) {
+        clearInterval(interval);
+        document.getElementById('pointsCount').textContent = target;
+        document.getElementById('pointsFill').style.width = (target/500*100) + '%';
+        document.getElementById('pointsNext').textContent = 'Earn ' + (500 - target) + ' more points to reach Palm Grove status';
+      }
+    }, 40);
+
+    form.style.display = 'none';
+    success.style.display = 'block';
+    successMsg.textContent = `Welcome, ${first}! Your card is registered. You have 50 welcome points!`;
+    showToast('🌴 Welcome to Tamra Loyalty Club, ' + first + '!');
+  }
+
+  // ===== TOAST =====
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  }
+
+  // ===== SMOOTH ACTIVE NAV HIGHLIGHT =====
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+    });
+  });
+</script>
+</body>
+</html>
